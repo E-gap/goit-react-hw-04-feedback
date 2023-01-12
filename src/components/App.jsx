@@ -1,72 +1,60 @@
 import { useState } from 'react';
-/* import FeedbackOptions from './FeedbackOptions/FeedbackOptions.jsx';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions.jsx';
 import Statistics from './Statistics/Statistics.jsx';
 import Section from './Section/Section.jsx';
-import Notification from './Notification/Notification.jsx'; */
+import Notification from './Notification/Notification.jsx';
 
-export default function App() {
-  const [good, useGood] = useState('');
-  /* const [neutral, useNeutral] = useState('');
-  const [bad, useBad] = useState(''); */
+export function App() {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
-  useGood(5);
-  console.log(good);
+  const buttons = ['good', 'neutral', 'bad'];
 
-  /* const handleFeedback = event => {
-    this.setState(prevState => {
-      return {
-        [event.target.name]: prevState[event.target.name] + 1,
-      };
-    });
-  }; */
+  const handleFeedback = event => {
+    if (event.target.name === 'good') {
+      setGood(prevGood => prevGood + 1);
+    } else if (event.target.name === 'neutral') {
+      setNeutral(prevNeutral => prevNeutral + 1);
+    } else if (event.target.name === 'bad') {
+      setBad(prevBad => prevBad + 1);
+    }
+  };
 
-  /* const countTotal = () => {
-    const arrayValuesState = Object.values(this.state);
-    const total = arrayValuesState.reduce((acc, el) => {
-      return acc + el;
-    }, 0);
-    return total;
-  }; */
+  const countTotal = () => {
+    return good + neutral + bad;
+  };
 
-  /* const countPercentage = () => {
-    const arrayValuesState = Object.values(this.state);
-    const total = arrayValuesState.reduce((acc, el) => {
-      return acc + el;
-    }, 0);
-    return Math.round((this.state.Good * 100) / total);
-  }; */
+  const countPercentage = () => {
+    return Math.round((good * 100) / (good + neutral + bad));
+  };
 
   return (
     <div
       style={{
         height: '100vh',
-        //display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
         color: '#010101',
       }}
     >
-      <p>dfdfdff</p>
-      {/* <Section title="Please leave feedback">
-        <FeedbackOptions
-          options={{ good, neutral, bad }}
-          onLeaveFeedback={this.handleFeedback}
-        />
-      </Section> */}
-      {/* <Section title="Statistics">
-        {this.state.Good || this.state.Neutral || this.state.Bad ? (
+      <Section title="Please leave feedback">
+        <FeedbackOptions buttons={buttons} onLeaveFeedback={handleFeedback} />
+      </Section>
+      <Section title="Statistics">
+        {countTotal() ? (
           <Statistics
-            good={this.state.Good}
-            neutral={this.state.Neutral}
-            bad={this.state.Bad}
-            total={this.countTotal()}
-            positivePercentage={this.countPercentage()}
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={countTotal()}
+            positivePercentage={countPercentage()}
           />
         ) : (
           <Notification message="There is no feedback" />
         )}
-      </Section> */}
+      </Section>
     </div>
   );
 }

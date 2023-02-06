@@ -19,8 +19,11 @@ export function App() {
       case 'neutral':
         setNeutral(prevNeutral => prevNeutral + 1);
         break;
-      default:
+      case 'bad':
         setBad(prevBad => prevBad + 1);
+        break;
+      default:
+        console.log('there are not other variants of buttons');
     }
   };
 

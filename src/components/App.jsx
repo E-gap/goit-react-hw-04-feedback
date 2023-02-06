@@ -12,12 +12,15 @@ export function App() {
   const buttons = ['good', 'neutral', 'bad'];
 
   const handleFeedback = event => {
-    if (event.target.name === 'good') {
-      setGood(prevGood => prevGood + 1);
-    } else if (event.target.name === 'neutral') {
-      setNeutral(prevNeutral => prevNeutral + 1);
-    } else if (event.target.name === 'bad') {
-      setBad(prevBad => prevBad + 1);
+    switch (event.target.name) {
+      case 'good':
+        setGood(prevGood => prevGood + 1);
+        break;
+      case 'neutral':
+        setNeutral(prevNeutral => prevNeutral + 1);
+        break;
+      default:
+        setBad(prevBad => prevBad + 1);
     }
   };
 

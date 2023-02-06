@@ -16,3 +16,15 @@
   cursor: pointer;
   text-transform: capitalize;
 }
+
+button[name='good']:hover {
+  background-color: green;
+}
+
+button[name='neutral']:hover {
+  background-color: yellow;
+}
+
+button[name='bad']:hover {
+  background-color: red;
+}
